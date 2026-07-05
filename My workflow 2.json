@@ -1,0 +1,4329 @@
+{
+  "name": "My workflow 2",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "maxResults": 50,
+        "filters": {
+          "labelIds": [
+            "INBOX"
+          ],
+          "q": "has:attachment filename:pdf",
+          "readStatus": "both"
+        }
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "0f2a8216-1414-4bbf-808b-092306d3b07a",
+      "name": "Gmail Trigger",
+      "alwaysOutputData": true,
+      "retryOnFail": true,
+      "notesInFlow": false,
+      "executeOnce": false,
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "wApHbGsmxEPi7wvl",
+          "name": "Gmail account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "messageId": "={{$json.id}}",
+        "simple": false,
+        "options": {
+          "downloadAttachments": true
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        528,
+        -32
+      ],
+      "id": "3251d4c6-f14f-48b6-9cad-9b047c94ae52",
+      "name": "Get a message",
+      "webhookId": "34a3a876-31eb-4aec-8837-124f698c38ae",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "yBok9tAXMC638I0V",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appcXiKfzUBXlK4vR",
+          "mode": "list",
+          "cachedResultName": "Invoice Automation",
+          "cachedResultUrl": "https://airtable.com/appcXiKfzUBXlK4vR"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl7PdVyXuWmwGyvU",
+          "mode": "list",
+          "cachedResultName": "Invoices",
+          "cachedResultUrl": "https://airtable.com/appcXiKfzUBXlK4vR/tbl7PdVyXuWmwGyvU"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Approval Required": false
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Invoice Number",
+              "displayName": "Invoice Number",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Vendor Name",
+              "displayName": "Vendor Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Vendor Email",
+              "displayName": "Vendor Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Invoice Date",
+              "displayName": "Invoice Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Currency",
+              "displayName": "Currency",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Net Amount",
+              "displayName": "Net Amount",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "VAT Amount",
+              "displayName": "VAT Amount",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Gross Amount",
+              "displayName": "Gross Amount",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Draft",
+                  "value": "Draft"
+                },
+                {
+                  "name": "Pending Approval",
+                  "value": "Pending Approval"
+                },
+                {
+                  "name": "Approved",
+                  "value": "Approved"
+                },
+                {
+                  "name": "Rejected",
+                  "value": "Rejected"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Department",
+              "displayName": "Department",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Finance",
+                  "value": "Finance"
+                },
+                {
+                  "name": "HR",
+                  "value": "HR"
+                },
+                {
+                  "name": "IT",
+                  "value": "IT"
+                },
+                {
+                  "name": "Operations",
+                  "value": "Operations"
+                },
+                {
+                  "name": "Sales",
+                  "value": "Sales"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Approval Required",
+              "displayName": "Approval Required",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Confidence Score",
+              "displayName": "Confidence Score",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "PDF File",
+              "displayName": "PDF File",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        992,
+        -624
+      ],
+      "id": "2f8475d8-1097-4301-bfe8-4b797262cc6e",
+      "name": "Create a record",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ag5V5YwMgSE4JOaQ",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "43a9b34a-9989-44f8-a9a8-cfdf20e3aa34",
+              "leftValue": "={{$json.payload.mimeType}}",
+              "rightValue": "multipart/mixed",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        208,
+        0
+      ],
+      "id": "c103731f-b33b-42fb-bfd4-8e3ded5c0007",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "binaryPropertyName": "attachment_0",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [
+        736,
+        -32
+      ],
+      "id": "d88b8bc8-b5eb-4e6c-898e-d43ff0b9a999",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "models/gemini-3-flash-preview"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "You are an expert invoice extraction assistant.\n\nYour task is to extract structured data from invoice text.\n\nRules:\n- Return ONLY valid JSON.\n- Do NOT use markdown.\n- Do NOT wrap the output inside ```json.\n- Do NOT include explanations.\n- Do NOT omit any fields from the JSON schema.\n- If a value cannot be found, return null.\n- Dates must use YYYY-MM-DD format.\n- Monetary values must be numbers only (no currency symbols).\n- Detect the invoice currency.\n- Extract vendor email if available.\n- Extract vendor tax/VAT/GST ID if available.\n- Extract Purchase Order Number if available.\n- Purchase Order Number may appear as:\n  - PO Number\n  - PO No\n  - Purchase Order\n  - Purchase Order Number\n  - Order Reference\n  - Customer PO\n  - PO#\n- If no Purchase Order Number exists, set \"purchase_order_number\" to null.\n- Extract IBAN if available.\n- Extract all invoice line items.\n- confidence_score must be a decimal between 0 and 1.\n- Always return every field listed below, even if its value is null.\n\nIf the input text is empty, return exactly:\n\n{\n  \"vendor_name\": null,\n  \"vendor_email\": null,\n  \"vendor_uid\": null,\n  \"vendor_id\": null,\n  \"purchase_order_number\": null,\n  \"vendor_iban\": null,\n  \"invoice_number\": null,\n  \"invoice_date\": null,\n  \"due_date\": null,\n  \"net_amount\": 0,\n  \"vat_amount\": 0,\n  \"vat_percentage\": 0,\n  \"gross_amount\": 0,\n  \"currency\": null,\n  \"cost_center\": null,\n  \"line_items\": [],\n  \"confidence_score\": 0,\n  \"extraction_warnings\": [],\n  \"anomalies\": [\n    \"No invoice text provided for extraction\"\n  ],\n  \"approval_required\": false\n}\n\nOtherwise return exactly this JSON structure:\n\n{\n  \"vendor_name\": null,\n  \"vendor_email\": null,\n  \"vendor_uid\": null,\n  \"vendor_id\": null,\n  \"purchase_order_number\": null,\n  \"vendor_iban\": null,\n  \"invoice_number\": null,\n  \"invoice_date\": null,\n  \"due_date\": null,\n  \"net_amount\": 0,\n  \"vat_amount\": 0,\n  \"vat_percentage\": 0,\n  \"gross_amount\": 0,\n  \"currency\": null,\n  \"cost_center\": null,\n  \"line_items\": [\n    {\n      \"description\": \"\",\n      \"quantity\": 0,\n      \"unit_rate\": 0,\n      \"total\": 0\n    }\n  ],\n  \"confidence_score\": 0,\n  \"extraction_warnings\": [],\n  \"anomalies\": [],\n  \"approval_required\": false\n}",
+              "role": "model"
+            },
+            {
+              "content": "=Extract structured data from the following invoice.\n\nInvoice Text:\n\n{{ $('Extract from File').first().json.text }}"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        944,
+        -32
+      ],
+      "id": "153d5a91-3afc-4814-a591-6d66a8d36647",
+      "name": "Message a model",
+      "alwaysOutputData": false,
+      "credentials": {
+        "googlePalmApi": {
+          "id": "VBFR5LJAUaNOR3Ml",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const raw = $json.content.parts[0].text;\n\nconst cleaned = raw\n  .replace(/```json/g, \"\")\n  .replace(/```/g, \"\")\n  .trim();\n\nconst invoice = JSON.parse(cleaned);\n\nreturn {\n  json: invoice\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1296,
+        -32
+      ],
+      "id": "28da1eaf-52d7-41dc-b205-b7818039fc5c",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appcXiKfzUBXlK4vR",
+          "mode": "list",
+          "cachedResultName": "Invoice Automation",
+          "cachedResultUrl": "https://airtable.com/appcXiKfzUBXlK4vR"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl7PdVyXuWmwGyvU",
+          "mode": "list",
+          "cachedResultName": "Invoices",
+          "cachedResultUrl": "https://airtable.com/appcXiKfzUBXlK4vR/tbl7PdVyXuWmwGyvU"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Approval Required": "={{ $('Code in JavaScript').first().json.approval_required }}",
+            "Invoice Number": "={{ $('Code in JavaScript').first().json.invoice_number }}",
+            "Vendor Name": "={{ $('Code in JavaScript').first().json.vendor_name }}",
+            "Invoice Date": "={{ $('Code in JavaScript').first().json.invoice_date }}",
+            "Currency": "={{ $('Code in JavaScript').first().json.currency }}",
+            "Net Amount": "={{ $('Code in JavaScript').first().json.net_amount }}",
+            "VAT Amount": "={{ $('Code in JavaScript').first().json.vat_amount }}",
+            "Gross Amount": "={{ $('Code in JavaScript').first().json.gross_amount }}",
+            "Status": "Pending Approval",
+            "Department": "Finance",
+            "Confidence Score": "={{ $('Code in JavaScript').first().json.confidence_score }}",
+            "Due Date": "={{ $('Code in JavaScript').first().json.due_date }}",
+            "VAT Percentage": "={{ $('Code in JavaScript').first().json.vat_percentage }}",
+            "Cost Center": "={{ $('Code in JavaScript').first().json.cost_center }}",
+            "Line Items": "={{ JSON.stringify($('Code in JavaScript').first().json.line_items) }}",
+            "Anomalies": "={{ JSON.stringify($('Code in JavaScript').first().json.anomalies) }}",
+            "Vendor Email": "={{ $('Code in JavaScript').first().json.vendor_email }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Invoice Number",
+              "displayName": "Invoice Number",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Vendor Name",
+              "displayName": "Vendor Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Vendor Email",
+              "displayName": "Vendor Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Invoice Date",
+              "displayName": "Invoice Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Currency",
+              "displayName": "Currency",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Net Amount",
+              "displayName": "Net Amount",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "VAT Amount",
+              "displayName": "VAT Amount",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Gross Amount",
+              "displayName": "Gross Amount",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Draft",
+                  "value": "Draft"
+                },
+                {
+                  "name": "Pending Approval",
+                  "value": "Pending Approval"
+                },
+                {
+                  "name": "Approved",
+                  "value": "Approved"
+                },
+                {
+                  "name": "Rejected",
+                  "value": "Rejected"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Department",
+              "displayName": "Department",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Finance",
+                  "value": "Finance"
+                },
+                {
+                  "name": "HR",
+                  "value": "HR"
+                },
+                {
+                  "name": "IT",
+                  "value": "IT"
+                },
+                {
+                  "name": "Operations",
+                  "value": "Operations"
+                },
+                {
+                  "name": "Sales",
+                  "value": "Sales"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Approval Required",
+              "displayName": "Approval Required",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Confidence Score",
+              "displayName": "Confidence Score",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Due Date",
+              "displayName": "Due Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "VAT Percentage",
+              "displayName": "VAT Percentage",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Cost Center",
+              "displayName": "Cost Center",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Line Items",
+              "displayName": "Line Items",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Anomalies",
+              "displayName": "Anomalies",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {
+          "typecast": true
+        }
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        2256,
+        -112
+      ],
+      "id": "594ed0fb-af1b-4ef8-a945-09c86d82572b",
+      "name": "Create a record1",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ag5V5YwMgSE4JOaQ",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appcXiKfzUBXlK4vR",
+          "mode": "list",
+          "cachedResultName": "Invoice Automation",
+          "cachedResultUrl": "https://airtable.com/appcXiKfzUBXlK4vR"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl7PdVyXuWmwGyvU",
+          "mode": "list",
+          "cachedResultName": "Invoices",
+          "cachedResultUrl": "https://airtable.com/appcXiKfzUBXlK4vR/tbl7PdVyXuWmwGyvU"
+        },
+        "filterByFormula": "={Invoice Number} = \"{{$(\"Code in JavaScript\").first().json.invoice_number}}\"",
+        "returnAll": "=",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        1616,
+        -64
+      ],
+      "id": "0a732592-83e7-4cbc-9436-6121c4840a30",
+      "name": "Search records",
+      "alwaysOutputData": true,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ag5V5YwMgSE4JOaQ",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "f01e2180-a618-4921-a044-1928e5728cc1",
+              "leftValue": "={{ $json.id || null }}",
+              "rightValue": "=0",
+              "operator": {
+                "type": "string",
+                "operation": "notExists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        2032,
+        -32
+      ],
+      "id": "cbfcc1f5-5706-4df8-bbfe-baf8560aefd8",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appcXiKfzUBXlK4vR",
+          "mode": "list",
+          "cachedResultName": "Invoice Automation",
+          "cachedResultUrl": "https://airtable.com/appcXiKfzUBXlK4vR"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl7PdVyXuWmwGyvU",
+          "mode": "list",
+          "cachedResultName": "Invoices",
+          "cachedResultUrl": "https://airtable.com/appcXiKfzUBXlK4vR/tbl7PdVyXuWmwGyvU"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Approval Required": "={{ $('Code in JavaScript').first().json.approval_required }}",
+            "id": "={{ $('Search records').first().json.id }}",
+            "Invoice Number": "={{ $('Code in JavaScript').first().json.invoice_number }}",
+            "Vendor Name": "={{ $('Code in JavaScript').first().json.vendor_name }}",
+            "Vendor Email": "={{ $('Code in JavaScript').first().json.vendor_email }}",
+            "Invoice Date": "={{ $('Code in JavaScript').first().json.invoice_date.substring(0,10) }}",
+            "Currency": "={{ $('Code in JavaScript').first().json.currency }}",
+            "Net Amount": "={{ $('Code in JavaScript').first().json.net_amount }}",
+            "VAT Amount": "={{ $('Code in JavaScript').first().json.vat_amount }}",
+            "Gross Amount": "={{ $('Code in JavaScript').first().json.gross_amount }}",
+            "Due Date": "={{ $('Code in JavaScript').first().json.due_date }}",
+            "VAT Percentage": "={{ $('Code in JavaScript').first().json.vat_percentage }}",
+            "Cost Center": "={{ $('Code in JavaScript').first().json.cost_center }}",
+            "Confidence Score": "={{ $('Code in JavaScript').first().json.confidence_score }}",
+            "Line Items": "={{ JSON.stringify($('Code in JavaScript').first().json.line_items) }}",
+            "Anomalies": "={{ JSON.stringify($('Code in JavaScript').first().json.anomalies) }}",
+            "Status": "Pending Approval",
+            "Department": "Finance"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Invoice Number",
+              "displayName": "Invoice Number",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Vendor Name",
+              "displayName": "Vendor Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Vendor Email",
+              "displayName": "Vendor Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Invoice Date",
+              "displayName": "Invoice Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Currency",
+              "displayName": "Currency",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Net Amount",
+              "displayName": "Net Amount",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "VAT Amount",
+              "displayName": "VAT Amount",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Gross Amount",
+              "displayName": "Gross Amount",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Draft",
+                  "value": "Draft"
+                },
+                {
+                  "name": "Pending Approval",
+                  "value": "Pending Approval"
+                },
+                {
+                  "name": "Approved",
+                  "value": "Approved"
+                },
+                {
+                  "name": "Rejected",
+                  "value": "Rejected"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Department",
+              "displayName": "Department",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Finance",
+                  "value": "Finance"
+                },
+                {
+                  "name": "HR",
+                  "value": "HR"
+                },
+                {
+                  "name": "IT",
+                  "value": "IT"
+                },
+                {
+                  "name": "Operations",
+                  "value": "Operations"
+                },
+                {
+                  "name": "Sales",
+                  "value": "Sales"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Approval Required",
+              "displayName": "Approval Required",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Confidence Score",
+              "displayName": "Confidence Score",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Due Date",
+              "displayName": "Due Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "VAT Percentage",
+              "displayName": "VAT Percentage",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Cost Center",
+              "displayName": "Cost Center",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Line Items",
+              "displayName": "Line Items",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Anomalies",
+              "displayName": "Anomalies",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {
+          "typecast": true
+        }
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        2256,
+        80
+      ],
+      "id": "b51caa34-277d-42a2-a001-ef4f7844807e",
+      "name": "Update record",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ag5V5YwMgSE4JOaQ",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "jayamohan6970@gmail.com",
+        "subject": "=Invoice Approval Required - {{ $('Code in JavaScript').first().json.invoice_number }}",
+        "message": "=<h2>Invoice Approval Required</h2>\n\n<p><b>Invoice Number:</b> {{ $('Code in JavaScript').first().json.invoice_number }}</p>\n\n<p><b>Vendor:</b> {{ $('Code in JavaScript').first().json.vendor_name }}</p>\n\n<p><b>Amount:</b>\n{{ $('Code in JavaScript').first().json.gross_amount }}\n{{ $('Code in JavaScript').first().json.currency }}\n</p>\n\n<br>\n\n<a href=\"https://jayamohan.app.n8n.cloud/webhook/invoice-approval?action=approve&id={{ $('Search records').first().json.id }}\"\nstyle=\"background:#28a745;color:white;padding:12px 20px;text-decoration:none;border-radius:5px;\">\nApprove\n</a>\n\n&nbsp;&nbsp;\n\n<a href=\"https://jayamohan.app.n8n.cloud/webhook/invoice-approval?action=reject&id={{ $('Search records').first().json.id }}\"\nstyle=\"background:#dc3545;color:white;padding:12px 20px;text-decoration:none;border-radius:5px;\">\nReject\n</a>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        2464,
+        -112
+      ],
+      "id": "256784a6-da94-46e1-917d-a2d0ee140b1c",
+      "name": "Send a message",
+      "webhookId": "25d1e779-d746-4a91-a8a8-5f8d02496412",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "yBok9tAXMC638I0V",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appcXiKfzUBXlK4vR",
+          "mode": "list",
+          "cachedResultName": "Invoice Automation",
+          "cachedResultUrl": "https://airtable.com/appcXiKfzUBXlK4vR"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl7PdVyXuWmwGyvU",
+          "mode": "list",
+          "cachedResultName": "Invoices",
+          "cachedResultUrl": "https://airtable.com/appcXiKfzUBXlK4vR/tbl7PdVyXuWmwGyvU"
+        },
+        "filterByFormula": "=RECORD_ID() = \"{{ $json.query.id }}\"",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        16,
+        416
+      ],
+      "id": "41b94e49-fdc4-4d82-8f97-36228d00d4ab",
+      "name": "Search records1",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ag5V5YwMgSE4JOaQ",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "path": "invoice-approval",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -304,
+        368
+      ],
+      "id": "1336d4d0-07f3-4d51-990c-57e3fce1b8ce",
+      "name": "Webhook",
+      "webhookId": "f73d9133-407c-4b5e-aa95-f8c4632b3e66"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "f868c422-c8cf-48d8-a7eb-272c96da32a2",
+              "leftValue": "={{ $('Webhook').first().json.query.action }}",
+              "rightValue": "approve",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        224,
+        416
+      ],
+      "id": "505c6dff-5ff9-4797-bfac-4139b244560c",
+      "name": "If2"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appcXiKfzUBXlK4vR",
+          "mode": "list",
+          "cachedResultName": "Invoice Automation",
+          "cachedResultUrl": "https://airtable.com/appcXiKfzUBXlK4vR"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl7PdVyXuWmwGyvU",
+          "mode": "list",
+          "cachedResultName": "Invoices",
+          "cachedResultUrl": "https://airtable.com/appcXiKfzUBXlK4vR/tbl7PdVyXuWmwGyvU"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $('Search records1').first().json.id }}",
+            "Status": "Approved"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Invoice Number",
+              "displayName": "Invoice Number",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Vendor Name",
+              "displayName": "Vendor Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Vendor Email",
+              "displayName": "Vendor Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Invoice Date",
+              "displayName": "Invoice Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Currency",
+              "displayName": "Currency",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Net Amount",
+              "displayName": "Net Amount",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "VAT Amount",
+              "displayName": "VAT Amount",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Gross Amount",
+              "displayName": "Gross Amount",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Draft",
+                  "value": "Draft"
+                },
+                {
+                  "name": "Pending Approval",
+                  "value": "Pending Approval"
+                },
+                {
+                  "name": "Approved",
+                  "value": "Approved"
+                },
+                {
+                  "name": "Rejected",
+                  "value": "Rejected"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Department",
+              "displayName": "Department",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Finance",
+                  "value": "Finance"
+                },
+                {
+                  "name": "HR",
+                  "value": "HR"
+                },
+                {
+                  "name": "IT",
+                  "value": "IT"
+                },
+                {
+                  "name": "Operations",
+                  "value": "Operations"
+                },
+                {
+                  "name": "Sales",
+                  "value": "Sales"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Approval Required",
+              "displayName": "Approval Required",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Confidence Score",
+              "displayName": "Confidence Score",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Due Date",
+              "displayName": "Due Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "VAT Percentage",
+              "displayName": "VAT Percentage",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Cost Center",
+              "displayName": "Cost Center",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Line Items",
+              "displayName": "Line Items",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Anomalies",
+              "displayName": "Anomalies",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Manager Decision",
+              "displayName": "Manager Decision",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Pending",
+                  "value": "Pending"
+                },
+                {
+                  "name": "Approved",
+                  "value": "Approved"
+                },
+                {
+                  "name": "Rejected",
+                  "value": "Rejected"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        496,
+        304
+      ],
+      "id": "cf2fc951-7beb-4b31-9f32-4c2706bd9ecf",
+      "name": "Update record1",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ag5V5YwMgSE4JOaQ",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appcXiKfzUBXlK4vR",
+          "mode": "list",
+          "cachedResultName": "Invoice Automation",
+          "cachedResultUrl": "https://airtable.com/appcXiKfzUBXlK4vR"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl7PdVyXuWmwGyvU",
+          "mode": "list",
+          "cachedResultName": "Invoices",
+          "cachedResultUrl": "https://airtable.com/appcXiKfzUBXlK4vR/tbl7PdVyXuWmwGyvU"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $('Search records1').first().json.id }}",
+            "Status": "Rejected"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Invoice Number",
+              "displayName": "Invoice Number",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Vendor Name",
+              "displayName": "Vendor Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Vendor Email",
+              "displayName": "Vendor Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Invoice Date",
+              "displayName": "Invoice Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Currency",
+              "displayName": "Currency",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Net Amount",
+              "displayName": "Net Amount",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "VAT Amount",
+              "displayName": "VAT Amount",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Gross Amount",
+              "displayName": "Gross Amount",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Draft",
+                  "value": "Draft"
+                },
+                {
+                  "name": "Pending Approval",
+                  "value": "Pending Approval"
+                },
+                {
+                  "name": "Approved",
+                  "value": "Approved"
+                },
+                {
+                  "name": "Rejected",
+                  "value": "Rejected"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Department",
+              "displayName": "Department",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Finance",
+                  "value": "Finance"
+                },
+                {
+                  "name": "HR",
+                  "value": "HR"
+                },
+                {
+                  "name": "IT",
+                  "value": "IT"
+                },
+                {
+                  "name": "Operations",
+                  "value": "Operations"
+                },
+                {
+                  "name": "Sales",
+                  "value": "Sales"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Approval Required",
+              "displayName": "Approval Required",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Confidence Score",
+              "displayName": "Confidence Score",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Due Date",
+              "displayName": "Due Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "VAT Percentage",
+              "displayName": "VAT Percentage",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Cost Center",
+              "displayName": "Cost Center",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Line Items",
+              "displayName": "Line Items",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Anomalies",
+              "displayName": "Anomalies",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Manager Decision",
+              "displayName": "Manager Decision",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Pending",
+                  "value": "Pending"
+                },
+                {
+                  "name": "Approved",
+                  "value": "Approved"
+                },
+                {
+                  "name": "Rejected",
+                  "value": "Rejected"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        496,
+        512
+      ],
+      "id": "01435558-90cd-4d34-b112-413b087f0b39",
+      "name": "Update record2",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ag5V5YwMgSE4JOaQ",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "jayamohanyata@gmail.com",
+        "subject": "=Invoice Approved - {{ $('Search records1').first().json.fields['Invoice Number'] }}",
+        "message": "=<h2>Invoice Approved ✅</h2>  <p>Hello,</p>  <p>Your invoice has been approved successfully.</p>  <hr>  <p><b>Invoice Number:</b> {{ $('Search records1').first().json.fields['Invoice Number'] }}</p>  <p><b>Vendor:</b> {{ $('Search records1').first().json.fields['Vendor Name'] }}</p>  <p><b>Amount:</b> {{ $('Search records1').first().json.fields['Gross Amount'] }} {{ $('Search records1').first().json.fields['Currency'] }}</p>  <p><b>Status:</b> Approved</p>  <hr>  <p>Thank you.</p>  <p><b>Finance Team</b></p>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        640,
+        304
+      ],
+      "id": "ded8a32c-192a-4bd4-8428-4272fc5f0852",
+      "name": "Send a message1",
+      "webhookId": "81af60dc-6397-4da9-a925-cc91fbd16a1e",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "wApHbGsmxEPi7wvl",
+          "name": "Gmail account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "jayamohanyata@gmail.com",
+        "subject": "=Invoice Rejected - {{ $('Search records1').first().json.fields['Invoice Number'] }}",
+        "message": "=<h2>Invoice Rejected ❌</h2>  <p>Hello,</p>  <p>Your invoice has been reviewed and rejected.</p>  <hr>  <p><b>Invoice Number:</b> {{ $('Search records1').first().json.fields['Invoice Number'] }}</p>  <p><b>Vendor:</b> {{ $('Search records1').first().json.fields['Vendor Name'] }}</p>  <p><b>Amount:</b> {{ $('Search records1').first().json.fields['Gross Amount'] }} {{ $('Search records1').first().json.fields['Currency'] }}</p>  <p><b>Status:</b> Rejected</p>  <hr>  <p>If you believe this is incorrect, please contact the Finance Team.</p>  <p><b>Finance Team</b></p>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        640,
+        512
+      ],
+      "id": "3e265acd-7a9a-4e66-b583-8729867ea345",
+      "name": "Send a message2",
+      "webhookId": "954e2354-1943-4780-9212-9b078d9625cb",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "wApHbGsmxEPi7wvl",
+          "name": "Gmail account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appcXiKfzUBXlK4vR",
+          "mode": "list",
+          "cachedResultName": "Invoice Automation",
+          "cachedResultUrl": "https://airtable.com/appcXiKfzUBXlK4vR"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblHYbmI5YzweRGB6",
+          "mode": "list",
+          "cachedResultName": "Purchase Orders",
+          "cachedResultUrl": "https://airtable.com/appcXiKfzUBXlK4vR/tblHYbmI5YzweRGB6"
+        },
+        "filterByFormula": "=",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        1536,
+        432
+      ],
+      "id": "e0cbac38-693a-497e-9dfc-be02a1b2f97f",
+      "name": "Search Purchase Order",
+      "alwaysOutputData": true,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ag5V5YwMgSE4JOaQ",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const invoice = $('Code in JavaScript').first().json;\n\n// Get the PO from the connected input\nconst poRecord = $input.first().json.fields;\n\n// Get the invoice Airtable record\nconst invoiceRecord = $('Search records').first().json;\n\nconst vendorMatch =\n  invoice.vendor_name === poRecord[\"Vendor Name\"];\n\nconst amountMatch =\n  invoice.gross_amount === poRecord[\"Gross Amount\"];\n\nconst poMatch =\n  invoice.purchase_order_number === poRecord[\"PO Number\"];\n\nconst approved =\n  poRecord[\"Approval Status\"] === \"Approved\";\n\nreturn {\n  json: {\n    invoice_id: invoiceRecord.id,\n    vendor_match: vendorMatch,\n    amount_match: amountMatch,\n    po_match: poMatch,\n    approved: approved,\n    validation_passed:\n      vendorMatch &&\n      amountMatch &&\n      poMatch &&\n      approved\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1872,
+        432
+      ],
+      "id": "163d15c5-67be-4044-9ad0-6a56a39317f9",
+      "name": "Compare Invoice vs PO",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "08128fdd-e049-429b-a7fe-e709a7532d46",
+              "leftValue": "={{ $json.validation_passed }}",
+              "rightValue": "Ready for Payment",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        2096,
+        416
+      ],
+      "id": "bc244e7f-ac77-433e-9666-fef76ed6cea2",
+      "name": "PO Validation",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appcXiKfzUBXlK4vR",
+          "mode": "list",
+          "cachedResultName": "Invoice Automation",
+          "cachedResultUrl": "https://airtable.com/appcXiKfzUBXlK4vR"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl7PdVyXuWmwGyvU",
+          "mode": "list",
+          "cachedResultName": "Invoices",
+          "cachedResultUrl": "https://airtable.com/appcXiKfzUBXlK4vR/tbl7PdVyXuWmwGyvU"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $('Search records').first().json.id }}",
+            "Status": "Approved",
+            "Manager Decision": "Approved"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Invoice Number",
+              "displayName": "Invoice Number",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Vendor Name",
+              "displayName": "Vendor Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Vendor Email",
+              "displayName": "Vendor Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Invoice Date",
+              "displayName": "Invoice Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Currency",
+              "displayName": "Currency",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Net Amount",
+              "displayName": "Net Amount",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "VAT Amount",
+              "displayName": "VAT Amount",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Gross Amount",
+              "displayName": "Gross Amount",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Draft",
+                  "value": "Draft"
+                },
+                {
+                  "name": "Pending Approval",
+                  "value": "Pending Approval"
+                },
+                {
+                  "name": "Approved",
+                  "value": "Approved"
+                },
+                {
+                  "name": "Rejected",
+                  "value": "Rejected"
+                },
+                {
+                  "name": "Ready for Payment",
+                  "value": "Ready for Payment"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Department",
+              "displayName": "Department",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Finance",
+                  "value": "Finance"
+                },
+                {
+                  "name": "HR",
+                  "value": "HR"
+                },
+                {
+                  "name": "IT",
+                  "value": "IT"
+                },
+                {
+                  "name": "Operations",
+                  "value": "Operations"
+                },
+                {
+                  "name": "Sales",
+                  "value": "Sales"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Approval Required",
+              "displayName": "Approval Required",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Confidence Score",
+              "displayName": "Confidence Score",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Due Date",
+              "displayName": "Due Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "VAT Percentage",
+              "displayName": "VAT Percentage",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Cost Center",
+              "displayName": "Cost Center",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Line Items",
+              "displayName": "Line Items",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Anomalies",
+              "displayName": "Anomalies",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Manager Decision",
+              "displayName": "Manager Decision",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Pending",
+                  "value": "Pending"
+                },
+                {
+                  "name": "Approved",
+                  "value": "Approved"
+                },
+                {
+                  "name": "Rejected",
+                  "value": "Rejected"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Purchase Orders",
+              "displayName": "Purchase Orders",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        2288,
+        288
+      ],
+      "id": "5ed5ccd3-575a-473c-95b2-bee273acf126",
+      "name": "Update Invoice Status",
+      "alwaysOutputData": true,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ag5V5YwMgSE4JOaQ",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appcXiKfzUBXlK4vR",
+          "mode": "list",
+          "cachedResultName": "Invoice Automation",
+          "cachedResultUrl": "https://airtable.com/appcXiKfzUBXlK4vR"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl7PdVyXuWmwGyvU",
+          "mode": "list",
+          "cachedResultName": "Invoices",
+          "cachedResultUrl": "https://airtable.com/appcXiKfzUBXlK4vR/tbl7PdVyXuWmwGyvU"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Approval Required": false,
+            "id": "={{ $('Search records').first().json.id }}",
+            "Net Amount": 0,
+            "VAT Amount": 0,
+            "Gross Amount": 0,
+            "Confidence Score": 0,
+            "VAT Percentage": 0,
+            "Status": "Pending Approval",
+            "Manager Decision": "Needs Review",
+            "Anomalies": "={{ $('Compare Invoice vs PO').first().json.mismatches.join(', ') }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Invoice Number",
+              "displayName": "Invoice Number",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Vendor Name",
+              "displayName": "Vendor Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Vendor Email",
+              "displayName": "Vendor Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Invoice Date",
+              "displayName": "Invoice Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Currency",
+              "displayName": "Currency",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Net Amount",
+              "displayName": "Net Amount",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "VAT Amount",
+              "displayName": "VAT Amount",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Gross Amount",
+              "displayName": "Gross Amount",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Draft",
+                  "value": "Draft"
+                },
+                {
+                  "name": "Pending Approval",
+                  "value": "Pending Approval"
+                },
+                {
+                  "name": "Approved",
+                  "value": "Approved"
+                },
+                {
+                  "name": "Rejected",
+                  "value": "Rejected"
+                },
+                {
+                  "name": "Ready for Payment",
+                  "value": "Ready for Payment"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Department",
+              "displayName": "Department",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Finance",
+                  "value": "Finance"
+                },
+                {
+                  "name": "HR",
+                  "value": "HR"
+                },
+                {
+                  "name": "IT",
+                  "value": "IT"
+                },
+                {
+                  "name": "Operations",
+                  "value": "Operations"
+                },
+                {
+                  "name": "Sales",
+                  "value": "Sales"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Approval Required",
+              "displayName": "Approval Required",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Confidence Score",
+              "displayName": "Confidence Score",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Due Date",
+              "displayName": "Due Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "VAT Percentage",
+              "displayName": "VAT Percentage",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Cost Center",
+              "displayName": "Cost Center",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Line Items",
+              "displayName": "Line Items",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Anomalies",
+              "displayName": "Anomalies",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Manager Decision",
+              "displayName": "Manager Decision",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Pending",
+                  "value": "Pending"
+                },
+                {
+                  "name": "Approved",
+                  "value": "Approved"
+                },
+                {
+                  "name": "Rejected",
+                  "value": "Rejected"
+                },
+                {
+                  "name": "Needs Review",
+                  "value": "Needs Review"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Purchase Orders",
+              "displayName": "Purchase Orders",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        2304,
+        512
+      ],
+      "id": "f4be28a0-6a9b-4e04-be75-d6ee32ac1454",
+      "name": "Update Procurement Review",
+      "alwaysOutputData": true,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ag5V5YwMgSE4JOaQ",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "jayamohanyata@gmail.com",
+        "subject": "=Invoice Approved - {{ $('Code in JavaScript').first().json.invoice_number }}",
+        "message": "=Hello,  Your invoice has been approved.  Invoice Number: {{ $('Code in JavaScript').first().json.invoice_number }}  Vendor: {{ $('Code in JavaScript').first().json.vendor_name }}  Purchase Order: {{ $('Code in JavaScript').first().json.purchase_order_number }}  Amount: {{ $('Code in JavaScript').first().json.gross_amount }}  Status: Approved  Thank you, Accounts Payable Team",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        2496,
+        288
+      ],
+      "id": "e6a3a9e3-c231-4a85-95d5-d3011204eae5",
+      "name": "Send a message3",
+      "webhookId": "e95b817f-6c77-400a-9fe6-378ba79b078a",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "wApHbGsmxEPi7wvl",
+          "name": "Gmail account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "simple": false,
+        "filters": {
+          "q": "subject:Resume"
+        },
+        "options": {
+          "downloadAttachments": true
+        }
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        192,
+        736
+      ],
+      "id": "771e2516-0ba2-452f-b10a-7710559bc513",
+      "name": "Gmail Trigger1",
+      "alwaysOutputData": true,
+      "executeOnce": false,
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "wApHbGsmxEPi7wvl",
+          "name": "Gmail account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "binaryPropertyName": "attachment_1",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [
+        624,
+        720
+      ],
+      "id": "446df71d-1bc4-44f2-96de-afe1b71025d8",
+      "name": "Extract from File1",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "messageId": "={{ $('Gmail Trigger1').first().json.id }}",
+        "simple": false,
+        "options": {
+          "downloadAttachments": true
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        400,
+        736
+      ],
+      "id": "011bc988-ed47-49ae-b274-3e21d1caacfe",
+      "name": "Get a message1",
+      "webhookId": "8c29f65a-097e-4829-ad6c-55ea5c0b356d",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "wApHbGsmxEPi7wvl",
+          "name": "Gmail account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const response = $input.first().json;\n\n// Get the Gemini response\nlet text = response.content.parts[0].text;\n\n// Remove markdown code fences if present\ntext = text\n  .replace(/^```json\\s*/i, \"\")\n  .replace(/^```\\s*/i, \"\")\n  .replace(/\\s*```$/, \"\")\n  .trim();\n\n// Parse JSON\nreturn [\n  {\n    json: JSON.parse(text)\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1184,
+        720
+      ],
+      "id": "6b284e30-3338-4074-9f70-02cee318b95a",
+      "name": "Parse Resume JSON"
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "binaryPropertyName": "attachment_0",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [
+        896,
+        864
+      ],
+      "id": "c50d9445-614a-41e2-b208-96e8ab024a9e",
+      "name": "Extract from File2",
+      "alwaysOutputData": false,
+      "executeOnce": false
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.5-flash",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.5-flash"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=You are an expert Resume Parser.\n\nExtract structured information from the resume.\n\nReturn ONLY valid JSON.\n\nDo not use markdown.\n\nDo not explain anything.\n\nReturn exactly this schema:\n\n{\n  \"name\": \"\",\n  \"email\": \"\",\n  \"phone\": \"\",\n  \"location\": \"\",\n  \"summary\": \"\",\n  \"skills\": [],\n  \"experience\": [],\n  \"education\": [],\n  \"projects\": [],\n  \"certifications\": [],\n  \"ats_keywords\": []\n}",
+              "role": "model"
+            },
+            {
+              "content": "={{ $('Extract from File1').first().json.text }}"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        848,
+        720
+      ],
+      "id": "b0515f11-246b-4bd2-b962-697f1d370137",
+      "name": "Resume Parser",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "VBFR5LJAUaNOR3Ml",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.5-flash",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.5-flash"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=You are an expert ATS Resume Reviewer.\n\nYour task is to compare a candidate's resume with a job description and evaluate the ATS compatibility.\n\nAnalyze:\n- Skills match\n- Missing skills\n- Strengths\n- Weaknesses\n- ATS keyword coverage\n- Overall recommendation\n\nReturn ONLY one valid JSON object.\n\nThe JSON schema MUST be exactly:\n\n{\n  \"ats_score\": 0,\n  \"matched_skills\": [],\n  \"missing_skills\": [],\n  \"strengths\": [],\n  \"improvements\": [],\n  \"final_recommendation\": \"\"\n}\n\nRules:\n- Return ONLY JSON.\n- Do NOT wrap the response in ```json or ``` markdown.\n- Do NOT include explanations.\n- Do NOT include comments.\n- Do NOT include any text before or after the JSON.\n- Ensure the response is valid JSON that can be parsed directly with JSON.parse().\n- The ats_score must be an integer between 0 and 100.\n- Arrays must contain only strings.\n- final_recommendation must be a concise paragraph explaining the ATS evaluation.",
+              "role": "model"
+            },
+            {
+              "content": "=Resume:\n\n{{ JSON.stringify($('Parse Resume JSON').first().json, null, 2) }}\n\nJob Description:\n\n{{ $('Extract from File2').first().json.text }}"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        1728,
+        704
+      ],
+      "id": "e84a57a4-e52f-4447-900d-98424464e136",
+      "name": "ATS Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "VBFR5LJAUaNOR3Ml",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1488,
+        720
+      ],
+      "id": "33c56445-c447-4c3c-bf90-b8338efdb4fb",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "jsCode": "const response = $input.first().json;\n\nlet text = response.content.parts[0].text;\n\n// Extract JSON between first { and last }\nconst start = text.indexOf(\"{\");\nconst end = text.lastIndexOf(\"}\");\n\nif (start === -1 || end === -1) {\n  throw new Error(\"No JSON found\");\n}\n\ntext = text.substring(start, end + 1);\n\nreturn [\n  {\n    json: JSON.parse(text)\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2080,
+        704
+      ],
+      "id": "e5af67b5-3cdd-488e-a46b-d05a119b12f2",
+      "name": "Parse ATS JSON"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1A9d5Qd5r06RzMYzDcZ16SFrOjsF_pS5TXR7bmOSkvAI",
+          "mode": "list",
+          "cachedResultName": "ATS Resume Results",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1A9d5Qd5r06RzMYzDcZ16SFrOjsF_pS5TXR7bmOSkvAI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1A9d5Qd5r06RzMYzDcZ16SFrOjsF_pS5TXR7bmOSkvAI/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Candidate Name": "={{ $('Parse Resume JSON').first().json.name }}",
+            "Email": "={{ $('Parse Resume JSON').first().json.email }}",
+            "Phone": "={{ $('Parse Resume JSON').first().json.phone }}",
+            "Location": "={{ $('Parse Resume JSON').first().json.location }}",
+            "ATS Score": "={{ $('Parse ATS JSON').first().json.ats_score }}",
+            "Matched Skills": "={{ $('Parse ATS JSON').first().json.matched_skills.join(', ') }}",
+            "Missing Skills": "={{ $('Parse ATS JSON').first().json.missing_skills.join(', ') }}",
+            "Strengths": "={{ $('Parse ATS JSON').first().json.strengths.join('\\n') }}",
+            "Final Recommendation": "={{ $('Parse ATS JSON').first().json.final_recommendation }}",
+            "Resume Summary": "={{ $('Parse Resume JSON').first().json.summary }}",
+            "Processed Date": "={{ $now }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Candidate Name",
+              "displayName": "Candidate Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Location",
+              "displayName": "Location",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ATS Score",
+              "displayName": "ATS Score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Matched Skills",
+              "displayName": "Matched Skills",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Missing Skills",
+              "displayName": "Missing Skills",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Strengths",
+              "displayName": "Strengths",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "improvements",
+              "displayName": "improvements",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Final Recommendation",
+              "displayName": "Final Recommendation",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Resume Summary",
+              "displayName": "Resume Summary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Processed Date",
+              "displayName": "Processed Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        2288,
+        704
+      ],
+      "id": "c41b8a85-de6f-4284-9f2a-1f6225d3be38",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "6vC8rIhPwAKpz63R",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "deb89336-f426-4aa7-b813-4e438e07d42e",
+              "leftValue": "={{ $json[\"ATS Score\"] }}",
+              "rightValue": 80,
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        2496,
+        704
+      ],
+      "id": "ccb029c5-0d07-4b37-9dd8-487ba6aebf1a",
+      "name": "If3"
+    },
+    {
+      "parameters": {
+        "sendTo": "jayamohanyata@gmail.com",
+        "subject": "Congratulations! You've Been Shortlisted 🎉",
+        "message": "=Hi {{ $json[\"Candidate Name\"] }},  Congratulations!  Your resume has successfully passed our ATS screening.  ATS Score: {{ $json[\"ATS Score\"] }}%  Our recruitment team will review your profile and contact you regarding the next stage of the hiring process.  Thank you for your interest.  Best Regards, HR Team",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        2768,
+        560
+      ],
+      "id": "160ebfad-2f6f-4ee2-9dac-f03e02870bc3",
+      "name": "Send a message4",
+      "webhookId": "8a104e48-3019-4038-8a4d-974e44182b7e",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "wApHbGsmxEPi7wvl",
+          "name": "Gmail account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "=jayamohanyata@gmail.com",
+        "subject": "Application Status",
+        "message": "=Hi {{ $json[\"Candidate Name\"] }},  Thank you for applying.  We have received your application and appreciate your interest.  At this time your profile has not met the required ATS threshold for this position.  We encourage you to apply again for future opportunities.  Best Regards, HR Team",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        2752,
+        800
+      ],
+      "id": "984de459-051b-4708-bb2d-06c9fd1a2ba4",
+      "name": "Send a message5",
+      "webhookId": "0b69819e-13eb-47da-9c30-a94adfad12ec",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "wApHbGsmxEPi7wvl",
+          "name": "Gmail account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "simple": false,
+        "filters": {
+          "q": "subject:Resume"
+        },
+        "options": {
+          "downloadAttachments": true
+        }
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        176,
+        1248
+      ],
+      "id": "f18b2954-e5bf-432f-9e89-4808e53afd70",
+      "name": "Gmail Trigger2",
+      "alwaysOutputData": true,
+      "executeOnce": false,
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "wApHbGsmxEPi7wvl",
+          "name": "Gmail account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "messageId": "={{ $('Gmail Trigger2').first().json.id }}",
+        "simple": false,
+        "options": {
+          "downloadAttachments": true
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        464,
+        1248
+      ],
+      "id": "ecaf7f41-195b-400b-8a23-766f5eb71b3e",
+      "name": "Get a message2",
+      "webhookId": "8c29f65a-097e-4829-ad6c-55ea5c0b356d",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "wApHbGsmxEPi7wvl",
+          "name": "Gmail account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.5-flash",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.5-flash"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Return ONLY valid JSON in this format.\n\n{\n  \"customer_name\": \"\",\n  \"company\": \"\",\n  \"sender_email\": \"\",\n  \"subject\": \"\",\n  \"issue_summary\": \"\",\n  \"detailed_description\": \"\",\n  \"category\": \"\",\n  \"priority\": \"\",\n  \"priority_reason\": \"\",\n  \"sentiment\": \"\",\n  \"product_service\": \"\",\n  \"assigned_team\": \"\",\n  \"tags\": [],\n  \"confidence_score\": 0,\n  \"status\": \"Open\",\n  \"internal_notes\": \"\"\n}\n\nRules:\n\nThe \"category\" field MUST be exactly one of these values:\n\n- Technical Support\n- Billing\n- Sales Inquiry\n- Refund Request\n- Bug Report\n- Feature Request\n- Support Request\n- General Support\n\nReturn ONLY valid JSON.\nDo not use markdown.\nconfidence_score must be an integer between 0 and 100.",
+              "role": "model"
+            },
+            {
+              "content": "=Customer Name:\n{{$json.from.value[0].name}}\n\nSender Email:\n{{$json.from.value[0].address}}\n\nSubject:\n{{$json.subject}}\n\nBody:\n{{$json.text}}"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        656,
+        1248
+      ],
+      "id": "63172b63-5012-41dc-984b-b59d4dd93b00",
+      "name": "Support Ticket AI",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "VBFR5LJAUaNOR3Ml",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const response = $input.first().json;\n\n// Get the Gemini response\nlet text = response.content.parts[0].text;\n\n// Remove markdown code fences if present\ntext = text\n  .replace(/^```json\\s*/i, \"\")\n  .replace(/^```\\s*/i, \"\")\n  .replace(/\\s*```$/, \"\")\n  .trim();\n\n// Parse JSON\nreturn [\n  {\n    json: JSON.parse(text)\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1024,
+        1248
+      ],
+      "id": "e892eb6b-6a91-45d9-afb6-e2cc1e995c25",
+      "name": "Parse Resume JSON1"
+    },
+    {
+      "parameters": {
+        "jsCode": "// AI output\nconst item = $input.first().json;\n\n// Gmail message\nconst gmail = $('Get a message2').first().json;\n\n// ----------------------------\n// Gmail fields\n// ----------------------------\nitem.customer_name =\n  gmail.from?.value?.[0]?.name ||\n  item.customer_name ||\n  \"Unknown\";\n\nitem.sender_email =\n  gmail.from?.value?.[0]?.address ||\n  item.sender_email ||\n  \"\";\n\nitem.subject =\n  gmail.subject ||\n  item.subject ||\n  \"\";\n\nitem.email_body =\n  gmail.text ||\n  gmail.html ||\n  item.email_body ||\n  \"\";\n\n// ----------------------------\n// Defaults\n// ----------------------------\nitem.company = item.company || \"\";\nitem.issue_summary = item.issue_summary || \"\";\nitem.detailed_description = item.detailed_description || \"\";\n\nitem.category = item.category || \"General Support\";\nitem.priority = item.priority || \"Medium\";\nitem.priority_reason = item.priority_reason || \"\";\nitem.sentiment = item.sentiment || \"Neutral\";\nitem.product_service = item.product_service || \"\";\nitem.assigned_team = item.assigned_team || \"Customer Success\";\nitem.status = item.status || \"Open\";\n\nitem.confidence_score = Number(item.confidence_score ?? 95);\n\nitem.internal_notes =\n  item.internal_notes ||\n  \"Ticket automatically classified by AI.\";\n\n// ----------------------------\n// Tags\n// ----------------------------\nif (!Array.isArray(item.tags)) {\n  item.tags = [];\n}\n\nitem.tags = [...new Set(item.tags)];\n\n// ----------------------------\n// Google Sheet column names\n// ----------------------------\nreturn [\n  {\n    json: {\n      \"Ticket ID\": `TKT-${Date.now()}`,\n      \"Customer Name\": item.customer_name,\n      \"Company\": item.company,\n      \"Sender Email\": item.sender_email,\n      \"Email Subject\": item.subject,\n      \"Email Body\": item.email_body,\n      \"Issue Summary\": item.issue_summary,\n      \"Detailed Description\": item.detailed_description,\n      \"Category\": item.category,\n      \"Priority\": item.priority,\n      \"Priority Reason\": item.priority_reason,\n      \"Sentiment\": item.sentiment,\n      \"Product/Service\": item.product_service,\n      \"Assigned Team\": item.assigned_team,\n      \"Tags\": item.tags.join(\", \"),\n      \"Confidence Score\": item.confidence_score,\n      \"Status\": item.status,\n      \"Internal Notes\": item.internal_notes,\n      \"Received At\": new Date().toISOString(),\n      \"Last Updated\": new Date().toISOString()\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1232,
+        1248
+      ],
+      "id": "14f0ad23-4604-4b8d-8a44-ba37ade7f654",
+      "name": "Validation Code"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1MNMqxKvS65jPmdXfMv_UBmaBsUOgTZjkwFWB1XmTnS8",
+          "mode": "list",
+          "cachedResultName": "AI Customer Support Tickets",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1MNMqxKvS65jPmdXfMv_UBmaBsUOgTZjkwFWB1XmTnS8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Support Tickets",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1MNMqxKvS65jPmdXfMv_UBmaBsUOgTZjkwFWB1XmTnS8/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Ticket ID": "=={{\"TKT-\"+Date.now()}}",
+            "Customer Name": "={{$json.customer_name}}",
+            "Company": "={{$json.company}}",
+            "Sender Email": "={{$json.sender_email}}",
+            "Email Subject": "={{$json.subject}}",
+            "Email Body": "={{$json.email_body}}",
+            "Issue Summary": "={{$json.issue_summary}}",
+            "Category": "={{$json.category}}",
+            "Priority": "={{$json.priority}}",
+            "Priority Reason": "={{$json.priority_reason}}",
+            "Sentiment": "={{$json.sentiment}}",
+            "Product/Service": "={{$json.product_service}}",
+            "Assigned Team": "={{$json.assigned_team}}",
+            "Tags": "={{$json.tags.join(\", \")}}",
+            "Confidence Score": "={{$json.confidence_score}}",
+            "Status": "={{$json.status}}",
+            "Received At": "={{$now}}",
+            "Last Updated": "={{$now}}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Ticket ID",
+              "displayName": "Ticket ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Customer Name",
+              "displayName": "Customer Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Company",
+              "displayName": "Company",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Sender Email",
+              "displayName": "Sender Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email Subject",
+              "displayName": "Email Subject",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email Body",
+              "displayName": "Email Body",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Issue Summary",
+              "displayName": "Issue Summary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Category",
+              "displayName": "Category",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Priority",
+              "displayName": "Priority",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Priority Reason",
+              "displayName": "Priority Reason",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Sentiment",
+              "displayName": "Sentiment",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Product/Service",
+              "displayName": "Product/Service",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Assigned Team",
+              "displayName": "Assigned Team",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Tags",
+              "displayName": "Tags",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Confidence Score",
+              "displayName": "Confidence Score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Internal Notes",
+              "displayName": "Internal Notes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Received At",
+              "displayName": "Received At",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Last Updated",
+              "displayName": "Last Updated",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1440,
+        1248
+      ],
+      "id": "ab41213a-41fc-44c1-b02e-a2d90ced9f1a",
+      "name": "AI Customer Support Tickets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "6vC8rIhPwAKpz63R",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{$json[\"Category\"]}}",
+                    "rightValue": "Technical Support",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "60da2640-23c9-4b75-b81f-603616e4b603"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "0"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "2bb3c86b-d083-4630-82e4-fd23672bce07",
+                    "leftValue": "={{$json[\"Category\"]}}",
+                    "rightValue": "Billing",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "1"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "82c13ca2-36ab-4e92-9925-4686318b0660",
+                    "leftValue": "={{$json[\"Category\"]}}",
+                    "rightValue": "Sales Inquiry",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "2"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "92022f9a-6471-4ee1-8895-0b35ba9c89f9",
+                    "leftValue": "={{$json[\"Category\"]}}",
+                    "rightValue": "Refund Request",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "3"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "7bcd7906-ac01-495d-8901-712744ffe84f",
+                    "leftValue": "={{$json[\"Category\"]}}",
+                    "rightValue": "Bug Report",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "4"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "4efd831d-4998-4e45-b92c-9fde53ee52d0",
+                    "leftValue": "={{$json[\"Category\"]}}",
+                    "rightValue": "Feature Request",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "5"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "fce4d535-a65f-49ec-a687-f874714a8457",
+                    "leftValue": "={{$json[\"Category\"]}}",
+                    "rightValue": "Account Access",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "6"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "37102b51-833c-4c19-b71d-3313e5742b63",
+                    "leftValue": "={{$json[\"Category\"]}}",
+                    "rightValue": "=General Support",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "7"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        1664,
+        1312
+      ],
+      "id": "75fef64a-acc8-46d1-a525-3b2393790c4b",
+      "name": "Switch",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "sendTo": "jayamohanyata@gmail.com",
+        "subject": "I cannot log in to my account.",
+        "message": "=Hi {{$json[\"Customer Name\"]}},\n\nThank you for contacting our Technical Support team.\n\nTicket ID: {{$json[\"Ticket ID\"]}}\n\nIssue:\n{{$json[\"Issue Summary\"]}}\n\nPriority:\n{{$json[\"Priority\"]}}\n\nOur technical team is reviewing your request and will contact you shortly.\n\nRegards,\nTechnical Support Team",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1776,
+        992
+      ],
+      "id": "a2cc25c1-4365-417f-88f7-a4b2ee086cf2",
+      "name": "Technical Support Request Received",
+      "webhookId": "8a104e48-3019-4038-8a4d-974e44182b7e",
+      "alwaysOutputData": true,
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "wApHbGsmxEPi7wvl",
+          "name": "Gmail account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{$json[\"Sender Email\"]}}",
+        "subject": "I was charged twice.",
+        "message": "=Hi {{$json[\"Customer Name\"]}},\n\nThank you for contacting our Billing Team.\n\nTicket ID: {{$json[\"Ticket ID\"]}}\n\nWe have received your billing request and will review it shortly.\n\nRegards,\nBilling Team",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1936,
+        1088
+      ],
+      "id": "ad58ee66-27ea-427b-8f5f-28d8ec00c88b",
+      "name": "Billing Support Request Received",
+      "webhookId": "8a104e48-3019-4038-8a4d-974e44182b7e",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "wApHbGsmxEPi7wvl",
+          "name": "Gmail account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{$json[\"Sender Email\"]}}",
+        "subject": "I want to know your pricing.",
+        "message": "=Hi {{$json[\"Customer Name\"]}},\n\nThank you for your interest in our services.\n\nTicket ID: {{$json[\"Ticket ID\"]}}\n\nOur Sales Team will contact you soon with the required information.\n\nRegards,\nSales Team",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        2128,
+        1184
+      ],
+      "id": "403c9ae8-588e-4d97-93a2-59e83fcf9cf6",
+      "name": "Sales Inquiry Received",
+      "webhookId": "8a104e48-3019-4038-8a4d-974e44182b7e",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "wApHbGsmxEPi7wvl",
+          "name": "Gmail account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{$json[\"Sender Email\"]}}",
+        "subject": "I want a refund for my order.",
+        "message": "=Hi {{$json[\"Customer Name\"]}},\n\nYour refund request has been received.\n\nTicket ID: {{$json[\"Ticket ID\"]}}\n\nOur team will verify your request and update you shortly.\n\nRegards,\nRefund Team",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        2304,
+        1296
+      ],
+      "id": "7d76b830-8ca7-4b66-b126-0511982e1ef2",
+      "name": "Refund Request Received",
+      "webhookId": "8a104e48-3019-4038-8a4d-974e44182b7e",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "wApHbGsmxEPi7wvl",
+          "name": "Gmail account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "{{$json[\"Sender Email\"]}}",
+        "subject": "The application crashes when I click Save.",
+        "message": "=Hi {{$json[\"Customer Name\"]}},\n\nThank you for reporting the issue.\n\nTicket ID: {{$json[\"Ticket ID\"]}}\n\nOur engineering team has started investigating the reported bug.\n\nRegards,\nEngineering Team",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        2288,
+        1488
+      ],
+      "id": "fd8a5d99-4c1b-4d63-b8da-7ed3bd31bda1",
+      "name": "Bug Report Received",
+      "webhookId": "8a104e48-3019-4038-8a4d-974e44182b7e",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "wApHbGsmxEPi7wvl",
+          "name": "Gmail account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "{{$json[\"Sender Email\"]}}",
+        "subject": "Please add dark mode.",
+        "message": "=Hi {{$json[\"Customer Name\"]}},\n\nThank you for sharing your feature suggestion.\n\nTicket ID: {{$json[\"Ticket ID\"]}}\n\nOur product team will review your request for future updates.\n\nRegards,\nProduct Team",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        2192,
+        1648
+      ],
+      "id": "f68a542d-27c6-45f9-8ad9-96d34d760194",
+      "name": "Feature Request Received",
+      "webhookId": "8a104e48-3019-4038-8a4d-974e44182b7e",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "wApHbGsmxEPi7wvl",
+          "name": "Gmail account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "{{$json[\"Sender Email\"]}}",
+        "subject": "What are your working hours?",
+        "message": "=Hi {{$json[\"Customer Name\"]}},\n\nWe have received your account access request.\n\nTicket ID: {{$json[\"Ticket ID\"]}}\n\nOur support team will verify your account and contact you shortly.\n\nRegards,\nAccount Support Team",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        2000,
+        1760
+      ],
+      "id": "9b61c862-7df1-470b-bd36-3d5db9ad2279",
+      "name": "Account Access Request Received",
+      "webhookId": "8a104e48-3019-4038-8a4d-974e44182b7e",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "wApHbGsmxEPi7wvl",
+          "name": "Gmail account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "{{$json[\"Sender Email\"]}}",
+        "subject": "What are your working hours?",
+        "message": "=Hi {{$json[\"Customer Name\"]}},\n\nThank you for contacting us.\n\nTicket ID: {{$json[\"Ticket ID\"]}}\n\nWe have received your inquiry and will respond as soon as possible.\n\nRegards,\nCustomer Support Team",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1776,
+        1760
+      ],
+      "id": "bd4e9926-d9ff-4aec-bafd-14e3eaf375f9",
+      "name": "Support Request Received",
+      "webhookId": "8a104e48-3019-4038-8a4d-974e44182b7e",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "wApHbGsmxEPi7wvl",
+          "name": "Gmail account 3"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get a message": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Get a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Search records",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a record1": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search records": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Search Purchase Order",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Create a record1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Update record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update record": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Search records1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search records1": {
+      "main": [
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "Update record1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Update record2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update record1": {
+      "main": [
+        [
+          {
+            "node": "Send a message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update record2": {
+      "main": [
+        [
+          {
+            "node": "Send a message2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search Purchase Order": {
+      "main": [
+        [
+          {
+            "node": "Compare Invoice vs PO",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Compare Invoice vs PO": {
+      "main": [
+        [
+          {
+            "node": "PO Validation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PO Validation": {
+      "main": [
+        [
+          {
+            "node": "Update Invoice Status",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Update Procurement Review",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Invoice Status": {
+      "main": [
+        [
+          {
+            "node": "Send a message3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail Trigger1": {
+      "main": [
+        [
+          {
+            "node": "Get a message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get a message1": {
+      "main": [
+        [
+          {
+            "node": "Extract from File1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File1": {
+      "main": [
+        [
+          {
+            "node": "Resume Parser",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Extract from File2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Resume JSON": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File2": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Resume Parser": {
+      "main": [
+        [
+          {
+            "node": "Parse Resume JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ATS Model": {
+      "main": [
+        [
+          {
+            "node": "Parse ATS JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "ATS Model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse ATS JSON": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "If3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If3": {
+      "main": [
+        [
+          {
+            "node": "Send a message4",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a message5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail Trigger2": {
+      "main": [
+        [
+          {
+            "node": "Get a message2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get a message2": {
+      "main": [
+        [
+          {
+            "node": "Support Ticket AI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Support Ticket AI": {
+      "main": [
+        [
+          {
+            "node": "Parse Resume JSON1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Resume JSON1": {
+      "main": [
+        [
+          {
+            "node": "Validation Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validation Code": {
+      "main": [
+        [
+          {
+            "node": "AI Customer Support Tickets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Customer Support Tickets": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Technical Support Request Received",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Billing Support Request Received",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Sales Inquiry Received",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Refund Request Received",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Bug Report Received",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Feature Request Received",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Account Access Request Received",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Support Request Received",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Technical Support Request Received": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "70e82c41-c5ab-4cbb-8d01-6374fa3b9f3c",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b3cd93ecbb062f960624a210d97397be5bc50067f6d29d02d94bc0b6146e1846"
+  },
+  "nodeGroups": [],
+  "id": "p92JzKuNrvCawr1U",
+  "tags": []
+}
